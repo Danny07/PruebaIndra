@@ -23,7 +23,7 @@ import lombok.ToString;
 @Data
 public class Coupon implements Serializable {
 
-	private static final long serialVersionUID = 5219933208635477481L;
+	private static final long serialVersionUID = 9028834168203927127L;
 
 	@Id
 	@Getter

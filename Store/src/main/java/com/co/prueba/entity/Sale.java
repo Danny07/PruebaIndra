@@ -3,7 +3,11 @@ package com.co.prueba.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -35,11 +39,12 @@ public class Sale implements Serializable {
 	@Getter
 	@Setter
     @GeneratedValue(strategy = GenerationType.UUID)
-	private String id;
+	private UUID id;
 	
 	@Getter
 	@Setter
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "sale")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@JoinColumn(name="id_sale")
 	private List<ShoppingCar> idShoppingCars;
 	
 	@Getter

@@ -2,13 +2,15 @@ package com.co.prueba.service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.co.prueba.dto.SaleDto;
-import com.co.prueba.dto.SaleDtoPutPost;
+import com.co.prueba.dto.SaleDtoPost;
+import com.co.prueba.dto.SaleDtoPut;
 import com.co.prueba.dto.ShoppingCarDtoGet;
 import com.co.prueba.entity.Coupon;
 import com.co.prueba.entity.Sale;
@@ -33,30 +35,32 @@ public class SaleService {
 	private SaleMapper mapper = Mappers.getMapper(SaleMapper.class);
 	
 	
-	public SaleDto createOrUpdate(SaleDtoPutPost saleDto) throws StoreException {
+	public SaleDto create(SaleDtoPost saleDto) throws StoreException {
 		
-		List<ShoppingCar> shoppings = saleDto.getShoppingCars().stream().map(shoppingCarDto-> {
-			ShoppingCar shoppingCar =  null;
-			try {
-				
-				shoppingCar = shoppingCarService.createUpate(shoppingCarDto);
-			} catch (StoreException e) {
-				e.printStackTrace();
-			}
-			return shoppingCar;
-		}).toList();
+		List<ShoppingCar> shoppings = shoppingCarService.create(saleDto.getShoppingCars());
 		Coupon coupon = null;
 		if(!Utils.ValidateNullVoidString(saleDto.getIdCupon())) {
 			coupon =  couponService.findByName(saleDto.getIdCupon());
 		}
-		Sale sale = mapper.saleDtoToSale(saleDto, coupon, shoppings);
+		Sale sale = mapper.saleDtoPostToSale(saleDto, coupon, shoppings);
 		sale = repository.save(sale);
 		return buildSaleDto(sale);
 		
 	}
 	
+	public SaleDto update(SaleDtoPut saleDto) throws StoreException {
+		List<ShoppingCar> shoppings = shoppingCarService.update(saleDto.getShoppingCars());
+		Coupon coupon = null;
+		if(!Utils.ValidateNullVoidString(saleDto.getIdCupon())) {
+			coupon =  couponService.findByName(saleDto.getIdCupon());
+		}
+		Sale sale = mapper.saleDtoPutToSale(saleDto, coupon, shoppings);
+		sale = repository.save(sale);
+		return buildSaleDto(sale);
+	}
+	
 	public SaleDto findSale(String id) {
-		Sale sale = repository.findById(id).orElse(null);
+		Sale sale = repository.findById(UUID.fromString(id)).orElse(null);
 		return null == sale ? null : buildSaleDto(sale);
 	}
 	
@@ -64,7 +68,7 @@ public class SaleService {
 		List<ShoppingCarDtoGet> shoppingCarsDtoGet = sale.getIdShoppingCars().stream().map(shoppingCar -> {
 			ShoppingCarDtoGet shoppingCarDtoGet = null;
 			try {
-				shoppingCarDtoGet = shoppingCarService.findById(shoppingCar.getId(), sale.getSaleDate());
+				shoppingCarDtoGet = shoppingCarService.findById(shoppingCar.getId() , sale.getSaleDate());
 			} catch (StoreException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

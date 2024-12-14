@@ -2,6 +2,7 @@ package com.co.prueba.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,7 +31,7 @@ public class Product implements Serializable {
 	@Getter
 	@Setter
     @GeneratedValue(strategy = GenerationType.UUID)
-	private String id;
+	private UUID id;
 	
 	@Getter
 	@Setter

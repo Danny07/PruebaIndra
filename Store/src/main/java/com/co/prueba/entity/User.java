@@ -2,6 +2,7 @@ package com.co.prueba.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,7 +34,7 @@ public class User implements Serializable {
 	@Getter
 	@Setter
     @GeneratedValue(strategy = GenerationType.UUID)
-	private String id;
+	private UUID id;
 	
 	@Getter
 	@Setter
@@ -60,16 +61,6 @@ public class User implements Serializable {
 	@Setter
 	@Column
 	private String email;
-	
-	@Getter
-	@Setter
-	@Column(name = "create_data")
-	private Date createData;
-	
-	@Getter
-	@Setter
-	@Column(name = "update_data")
-	private Date updateData;
 	
 
 }

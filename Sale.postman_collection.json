@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "2d74b697-8043-4b8d-b112-cb24cb0e4cfe",
+		"name": "Sale",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11266041"
+	},
+	"item": [
+		{
+			"name": "GetSale",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "PostSale",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"shoppingCars\": [\r\n    {\r\n      \"idUser\": \"7d101e4d-7865-cd34-bcb0-e421a93962f8\",\r\n      \"idProduct\": \"700f86d0-5146-1b4c-3087-5f48d57c75f2\",\r\n      \"quantity\": 5\r\n    }\r\n  ],\r\n  \"saleDate\": \"2024-12-13\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/sale",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sale"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutSale",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"shoppingCars\": [\r\n    {\r\n      \"idUser\": \"7d101e4d-7865-cd34-bcb0-e421a93962f8\",\r\n      \"idProduct\": \"700f86d0-5146-1b4c-3087-5f48d57c75f2\",\r\n      \"quantity\": 5\r\n    }\r\n  ],\r\n  \"saleDate\": \"2024-12-13T21:52:47.871Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/sale",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sale"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

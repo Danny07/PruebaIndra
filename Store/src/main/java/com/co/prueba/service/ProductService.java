@@ -1,5 +1,7 @@
 package com.co.prueba.service;
 
+import java.util.UUID;
+
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,7 @@ public class ProductService {
 	
 	public Product findProduct(String id) throws StoreException {
 		try {
-			Product product = repository.findById(id).orElse(null);
+			Product product = repository.findById(UUID.fromString(id)).orElse(null);
 			return product;
 		} catch (Exception e) {
 			throw new StoreException("Error inesperado: %s", e.getMessage());

@@ -8,7 +8,8 @@ import org.mapstruct.factory.Mappers;
 
 import com.co.prueba.dto.ShoppingCarDto;
 import com.co.prueba.dto.ShoppingCarDtoGet;
-import com.co.prueba.dto.ShoppingCarDtoPostPut;
+import com.co.prueba.dto.ShoppingCarDtoPost;
+import com.co.prueba.dto.ShoppingCarDtoPut;
 import com.co.prueba.entity.Product;
 import com.co.prueba.entity.ShoppingCar;
 import com.co.prueba.entity.User;
@@ -21,8 +22,13 @@ public interface ShoppingCarMapper {
 	
 	@Mapping(source = "user", target = "idUser")
 	@Mapping(source = "product", target = "idProduct")
+	@Mapping(target = "id", ignore = true)
+	ShoppingCar shoppingCarDtoPostToShoppingCar(ShoppingCarDtoPost shoppingCarDto, User user, Product product);
+	
+	@Mapping(source = "user", target = "idUser")
+	@Mapping(source = "product", target = "idProduct")
 	@Mapping(source = "shoppingCarDto.id", target = "id")
-	ShoppingCar shoppingCarDtoToShoppingCar(ShoppingCarDtoPostPut shoppingCarDto, User user, Product product);
+	ShoppingCar shoppingCarDtoPutToShoppingCar(ShoppingCarDtoPut shoppingCarDto, User user, Product product);
 		
 	@Mapping(source = "idUser.id", target = "idUser")
 	@Mapping(source = "idProduct.id", target = "idProduct")

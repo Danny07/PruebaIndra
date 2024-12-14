@@ -1,10 +1,11 @@
 package com.co.prueba.dto;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,43 +13,32 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.extern.jackson.Jacksonized;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Builder
 @Data
-@Jacksonized
-public class SaleDto implements Serializable {
+public class SaleDtoPut implements Serializable {
 	
-	private static final long serialVersionUID = -2654568346574067755L;
+	private static final long serialVersionUID = -6642478722050946473L;
 
 	@Getter
 	@Setter
+	@NotNull
 	private String id;
 	
 	@Getter
 	@Setter
-	private List<ShoppingCarDtoGet> idShoppingCars;
+	@Valid
+	private List<ShoppingCarDtoPut> shoppingCars;
 	
 	@Getter
 	@Setter
-	private String nameCoupon;
+	private String idCupon;
 	
 	@Getter
 	@Setter
-	private String valueCoupon;
-	
-	@Getter
-	@Setter
+	@NotNull
 	private Date saleDate;
-	
-	@Getter
-	@Setter
-	private BigDecimal subTotal;
-	
-	@Getter
-	@Setter
-	private BigDecimal total;
 }

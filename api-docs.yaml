@@ -1,0 +1,161 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  /sale:
+    get:
+      tags:
+      - sale-controller
+      operationId: findById
+      parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SaleDto'
+    put:
+      tags:
+      - sale-controller
+      operationId: updateSale
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaleDtoPut'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SaleDto'
+    post:
+      tags:
+      - sale-controller
+      operationId: createSale
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaleDtoPost'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SaleDto'
+components:
+  schemas:
+    SaleDtoPut:
+      required:
+      - id
+      - saleDate
+      type: object
+      properties:
+        id:
+          type: string
+        shoppingCars:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShoppingCarDtoPut'
+        idCupon:
+          type: string
+        saleDate:
+          type: string
+          format: date-time
+    ShoppingCarDtoPut:
+      required:
+      - idProduct
+      - idUser
+      type: object
+      properties:
+        id:
+          type: string
+        idUser:
+          type: string
+        idProduct:
+          type: string
+        quantity:
+          minimum: 0
+          type: integer
+          format: int64
+    SaleDto:
+      type: object
+      properties:
+        id:
+          type: string
+        idShoppingCars:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShoppingCarDtoGet'
+        nameCoupon:
+          type: string
+        valueCoupon:
+          type: string
+        saleDate:
+          type: string
+          format: date-time
+        subTotal:
+          type: number
+        total:
+          type: number
+    ShoppingCarDtoGet:
+      type: object
+      properties:
+        id:
+          type: string
+        idUser:
+          type: string
+        descriptionProducts:
+          type: string
+        priceProducts:
+          type: number
+        quantity:
+          type: integer
+          format: int64
+        subTotal:
+          type: number
+        total:
+          type: number
+    SaleDtoPost:
+      required:
+      - saleDate
+      type: object
+      properties:
+        shoppingCars:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShoppingCarDtoPost'
+        idCupon:
+          type: string
+        saleDate:
+          type: string
+          format: date-time
+    ShoppingCarDtoPost:
+      required:
+      - idProduct
+      - idUser
+      type: object
+      properties:
+        idUser:
+          type: string
+        idProduct:
+          type: string
+        quantity:
+          minimum: 0
+          type: integer
+          format: int64

@@ -1,6 +1,7 @@
 package com.co.prueba.entity;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,7 +33,7 @@ public class ShoppingCar implements Serializable {
 	@Getter
 	@Setter
     @GeneratedValue(strategy = GenerationType.UUID)
-	private String id;
+	private UUID id;
 	
 	@Getter
 	@Setter
@@ -56,10 +57,10 @@ public class ShoppingCar implements Serializable {
 	@Column(name = "is_sale")
 	private Boolean isSale;
 	
-	@Getter
+	/*@Getter
 	@Setter
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id_sale")
-	private Sale sale;
+    
+	private Sale sale;*/
 
 }
